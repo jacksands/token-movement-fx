@@ -1,0 +1,61 @@
+{
+  "TMFX": {
+    "Settings": {
+      "Title": "Token Movement FX",
+      "MenuName": "Token Movement FX",
+      "MenuLabel": "Configurar animações",
+      "MenuHint": "Escolha qual animação toca em cada tipo de movimento do token.",
+      "EnableName": "Ativar Token Movement FX",
+      "EnableHint": "Quando desativado, nenhuma animação de movimento será reproduzida.",
+      "Intro": "Escolha a animação de cada tipo de movimento. A tabela lista presets de teleporte do Automated Animations (ex.: Misty Step) e entradas On Token/AEFX. Presets delegam ao AA em Teleporte e Escavação; entradas On Token persistentes podem acompanhar o token e ser removidas ao final do movimento.",
+      "PlayOnHint": "Quando a animação escolhida é um preset de teleporte do Automated Animations, o módulo entrega o token em movimento ao AA. Solte o token onde quiser: esse ponto vira o destino, o círculo de alcance é ignorado e o AA cuida do som, dos efeitos, do desaparecimento e do deslocamento. Animações On Token e Itens iniciam o efeito de partida assim que o movimento começa.",
+      "Movement": "Movimento",
+      "Enabled": "Ativo",
+      "Animation": "Animação (Automated Animations)",
+      "Hide": "Ocultar durante o movimento",
+      "HideHint": "Esconde o token entre a animação de partida e a de chegada. Só vale quando a animação tem parte de chegada (Target) ou é um preset. Presets delegados de Teleporte/Escavar usam o Alpha/Fade do próprio preset.",
+      "RemovePersistent": "Remover animações persistentes",
+      "RemovePersistentHint": "Quando a animação é um efeito On Token persistente, remove apenas os efeitos que este movimento criou no token assim que o movimento termina. Outras auras persistentes no mesmo token permanecem.",
+      "HideNote": "Ocultar durante o movimento deixa o token invisível enquanto ele se desloca e o revela quando a animação de chegada começa. Precisa de uma animação com parte de chegada (Target) ou de um preset. Presets de Teleporte/Escavação delegados ao Automated Animations ignoram esta caixa: neles o Alpha/Delay Fade/Delay Return do preset controla o token.",
+      "Test": "Testar",
+      "TestHint": "Reproduzir um teste no token selecionado",
+      "Teleport": "Teleporte",
+      "None": "— Nenhuma —",
+      "OpenAA": "Abrir Automated Animations",
+      "OpenSequencer": "Abrir catálogo do Sequencer",
+      "Refresh": "Atualizar lista",
+      "Save": "Salvar",
+      "NoAA": "O Automated Animations não está ativo.",
+      "NoSequencer": "O Sequencer não está ativo. Não é possível reproduzir animações.",
+      "NoAnimations": "Nenhuma animação compatível encontrada. Crie ou edite uma entrada On Token, configure um item com o botão A-A ou use um preset de teleporte (ex.: Misty Step).",
+      "Unnamed": "Animação sem nome",
+      "SearchAnimation": "Buscar animação…",
+      "TokenTitle": "Animação do Token",
+      "TokenEnabled": "Ativar animações neste token",
+      "Dedicated": "Animação dedicada",
+      "DedicatedHint": "Usar a animação própria deste token para este movimento, em vez da geral.",
+      "UniversalLabel": "Animação Universal",
+      "Reset": "Restaurar padrão",
+      "ResetHint": "Limpa as configurações deste token e volta a seguir as configurações gerais.",
+      "UnsavedTitle": "Alterações não salvas",
+      "UnsavedMessage": "Você tem alterações que ainda não foram salvas. Deseja salvar antes de fechar?",
+      "Discard": "Descartar",
+      "Cancel": "Cancelar",
+      "Section": {
+        "presets": "Teleporte e Escavação — presets do Automated Animations",
+        "other": "Outros movimentos"
+      }
+    },
+    "Notifications": {
+      "Saved": "Configurações do Token Movement FX salvas.",
+      "NothingToPlay": "Escolha uma animação primeiro.",
+      "NoToken": "Selecione um token no mapa para testar a animação.",
+      "TestFailed": "Não foi possível reproduzir a animação de teste. Veja o console do navegador.",
+      "NoAA": "O Automated Animations não está ativo.",
+      "NoAAMenu": "Não foi possível abrir o menu do Automated Animations.",
+      "NoSequencer": "O Sequencer não está ativo.",
+      "NoAnimationsFound": "Nenhuma animação encontrada com a referência salva. Abra Configurar animações e escolha novamente.",
+      "Reset": "Configurações do token restauradas."
+    }
+  }
+}

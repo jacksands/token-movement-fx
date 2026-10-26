@@ -1,0 +1,199 @@
+@layer token-movement-fx {
+  .token-movement-fx .window-content {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .token-movement-fx .tmfx-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* The body owns the scrollbar so the footer is always reachable. */
+  .token-movement-fx .tmfx-body {
+    flex: 1;
+    min-height: 0;
+    padding: 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+  }
+
+  .token-movement-fx .tmfx-hint {
+    margin: 4px 0 8px;
+    font-size: var(--font-size-12);
+    color: var(--color-text-subtle);
+  }
+
+  .token-movement-fx .tmfx-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .token-movement-fx .tmfx-table th,
+  .token-movement-fx .tmfx-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--color-border-light-2);
+    vertical-align: middle;
+  }
+
+  .token-movement-fx .tmfx-table th {
+    position: sticky;
+    top: -12px;
+    z-index: 2;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: var(--color-bg, #1a1a1a);
+    /* Long labels (e.g. "Animação dedicada") must wrap instead of being
+       clipped by the body's horizontal overflow. */
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .token-movement-fx .tmfx-table th:nth-child(1) { width: 24%; }
+  .token-movement-fx .tmfx-table th:nth-child(2) { width: 7%; }
+  .token-movement-fx .tmfx-table th:nth-child(3) { width: 42%; }
+  .token-movement-fx .tmfx-table th:nth-child(4) { width: 11%; }
+  .token-movement-fx .tmfx-table th:nth-child(5) { width: 9%; }
+  .token-movement-fx .tmfx-table th:nth-child(6) { width: 7%; }
+
+  /* The per-token window labels the second column "Animação dedicada" /
+     "Dedicated animation", which needs more room than the global "Enabled". */
+  #token-movement-fx-config-token .tmfx-table th:nth-child(1) { width: 22%; }
+  #token-movement-fx-config-token .tmfx-table th:nth-child(2) { width: 13%; }
+  #token-movement-fx-config-token .tmfx-table th:nth-child(3) { width: 36%; }
+  #token-movement-fx-config-token .tmfx-table th:nth-child(4) { width: 11%; }
+  #token-movement-fx-config-token .tmfx-table th:nth-child(5) { width: 10%; }
+  #token-movement-fx-config-token .tmfx-table th:nth-child(6) { width: 8%; }
+
+  .token-movement-fx .tmfx-section-row td {
+    padding-top: 12px;
+    border-bottom: none;
+    font-size: var(--font-size-11);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .token-movement-fx .tmfx-center {
+    text-align: center;
+  }
+
+  .token-movement-fx .tmfx-movement {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .token-movement-fx .tmfx-movement > span:first-of-type {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .token-movement-fx .tmfx-movement img {
+    width: 24px;
+    height: 24px;
+    border: none;
+    object-fit: contain;
+  }
+
+  .token-movement-fx .tmfx-movement i {
+    width: 24px;
+    text-align: center;
+  }
+
+  .token-movement-fx .tmfx-badge {
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: var(--color-cool-4);
+    color: var(--color-text-light-1);
+    font-size: var(--font-size-10);
+    line-height: 1.6;
+  }
+
+  .token-movement-fx .tmfx-muted {
+    color: var(--color-text-subtle);
+  }
+
+  /* Animation field: native select, so the list always opens. */
+  .token-movement-fx .tmfx-table select {
+    width: 100%;
+    min-width: 220px;
+  }
+
+  .token-movement-fx .tmfx-search {
+    width: 100%;
+    margin-bottom: 2px;
+    font-size: var(--font-size-12);
+  }
+
+  .token-movement-fx .tmfx-token-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-light-2);
+    border-radius: 4px;
+  }
+
+  .token-movement-fx .tmfx-token-toggle .tmfx-muted {
+    font-weight: 400;
+  }
+
+  .token-movement-fx .tmfx-table select option[hidden] {
+    display: none;
+  }
+
+  .token-movement-fx .tmfx-footer {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 10px 12px;
+    border-top: 1px solid var(--color-border);
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .token-movement-fx .tmfx-footer button {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .token-movement-fx .notification {
+    margin: 8px 0;
+    padding: 8px;
+  }
+
+  /* The HUD shortcut is deliberately amber so it stands out from the core icons. */
+  #token-hud .tmfx-config-entry {
+    margin-top: 2px;
+    border-top: 1px solid var(--color-border-light-2);
+    background: linear-gradient(180deg, rgba(245, 166, 35, 0.28), rgba(200, 120, 0, 0.18));
+    border-radius: 4px;
+  }
+
+  #token-hud .tmfx-config-entry span {
+    color: #ffb545;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(245, 166, 35, 0.45);
+  }
+
+  #token-hud .tmfx-config-entry i {
+    color: #ffb545;
+  }
+
+  #token-hud .tmfx-config-entry:hover {
+    background: linear-gradient(180deg, rgba(245, 166, 35, 0.45), rgba(200, 120, 0, 0.3));
+    box-shadow: 0 0 10px rgba(245, 166, 35, 0.45);
+  }
+}

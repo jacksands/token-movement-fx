@@ -1,0 +1,119 @@
+<div class="tmfx-layout">
+  <div class="tmfx-body">
+    {{#unless sequencerActive}}
+      <p class="notification error">{{localize "TMFX.Settings.NoSequencer"}}</p>
+    {{/unless}}
+
+    {{#unless aaActive}}
+      <p class="notification warning">{{localize "TMFX.Settings.NoAA"}}</p>
+    {{else}}
+      {{#unless hasAAOptions}}
+        <p class="notification info">{{localize "TMFX.Settings.NoAnimations"}}</p>
+      {{/unless}}
+    {{/unless}}
+
+    <p class="notes tmfx-hint">{{localize "TMFX.Settings.Intro"}}</p>
+    <p class="notes tmfx-hint">{{localize "TMFX.Settings.PlayOnHint"}}</p>
+
+    {{#if tokenMode}}
+      <p class="notes tmfx-hint">
+        <label class="tmfx-token-toggle">
+          <input type="checkbox" name="tokenEnabled" {{checked tokenEnabled}}>
+          <strong>{{localize "TMFX.Settings.TokenEnabled"}}</strong>
+          <span class="tmfx-muted">{{tokenName}}</span>
+        </label>
+      </p>
+    {{/if}}
+
+    <table class="tmfx-table">
+      <thead>
+        <tr>
+          <th>{{localize "TMFX.Settings.Movement"}}</th>
+          <th class="tmfx-center">{{#if tokenMode}}{{localize "TMFX.Settings.Dedicated"}}{{else}}{{localize "TMFX.Settings.Enabled"}}{{/if}}</th>
+          <th>{{localize "TMFX.Settings.Animation"}}</th>
+          <th class="tmfx-center">{{localize "TMFX.Settings.Hide"}}</th>
+          <th class="tmfx-center" title="{{localize 'TMFX.Settings.RemovePersistentHint'}}">{{localize "TMFX.Settings.RemovePersistent"}}</th>
+          <th class="tmfx-center">{{localize "TMFX.Settings.Test"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each actions as |action|}}
+          {{#if action.showSection}}
+            <tr class="tmfx-section-row">
+              <td colspan="6">{{action.sectionLabel}}</td>
+            </tr>
+          {{/if}}
+          <tr data-action-id="{{action.id}}">
+            <td>
+              <div class="tmfx-movement">
+                {{#if action.img}}
+                  <img src="{{action.img}}" alt="">
+                {{else if action.icon}}
+                  <i class="{{action.icon}}"></i>
+                {{/if}}
+                <span>{{action.label}}</span>
+                {{#if action.teleport}}
+                  <span class="tmfx-badge">{{localize "TMFX.Settings.Teleport"}}</span>
+                {{/if}}
+              </div>
+            </td>
+            <td class="tmfx-center">
+              {{#if action.tokenMode}}
+                <input type="checkbox" name="actions.{{action.id}}.dedicated" data-dedicated-toggle {{checked action.dedicated}} title="{{localize 'TMFX.Settings.DedicatedHint'}}">
+              {{else}}
+                <input type="checkbox" name="actions.{{action.id}}.enabled" {{checked action.enabled}}>
+              {{/if}}
+            </td>
+            <td>
+              <input type="search" class="tmfx-search" data-filter-for="{{action.id}}"
+                     autocomplete="off" placeholder="{{localize 'TMFX.Settings.SearchAnimation'}}">
+              <select name="actions.{{action.id}}.animationId">
+                {{#each action.options as |option|}}
+                  <option value="{{option.value}}" data-search="{{option.search}}" {{#if option.selected}}selected{{/if}}>{{option.label}}</option>
+                {{/each}}
+              </select>
+            </td>
+            <td class="tmfx-center">
+              <input type="checkbox" name="actions.{{action.id}}.hide" data-dedicated-field {{#if action.tokenMode}}{{#unless action.dedicated}}disabled{{/unless}}{{/if}} {{checked action.hide}} title="{{localize 'TMFX.Settings.HideHint'}}">
+            </td>
+            <td class="tmfx-center">
+              <input type="checkbox" name="actions.{{action.id}}.removePersistent" data-dedicated-field {{#if action.tokenMode}}{{#unless action.dedicated}}disabled{{/unless}}{{/if}} {{checked action.removePersistent}} title="{{localize 'TMFX.Settings.RemovePersistentHint'}}">
+            </td>
+            <td class="tmfx-center">
+              <button type="button" data-action="test" data-tooltip="{{localize 'TMFX.Settings.TestHint'}}">
+                <i class="fa-solid fa-play"></i>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <p class="notes tmfx-hint">{{localize "TMFX.Settings.HideNote"}}</p>
+  </div>
+
+  <footer class="tmfx-footer">
+    {{#if tokenMode}}
+      <button type="button" data-action="reset" title="{{localize 'TMFX.Settings.ResetHint'}}">
+        <i class="fa-solid fa-rotate-left"></i>
+        {{localize "TMFX.Settings.Reset"}}
+      </button>
+    {{/if}}
+    <button type="button" data-action="openAA">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      {{localize "TMFX.Settings.OpenAA"}}
+    </button>
+    <button type="button" data-action="openSequencer">
+      <i class="fa-solid fa-film"></i>
+      {{localize "TMFX.Settings.OpenSequencer"}}
+    </button>
+    <button type="button" data-action="refresh">
+      <i class="fa-solid fa-rotate"></i>
+      {{localize "TMFX.Settings.Refresh"}}
+    </button>
+    <button type="submit">
+      <i class="fa-solid fa-floppy-disk"></i>
+      {{localize "TMFX.Settings.Save"}}
+    </button>
+  </footer>
+</div>

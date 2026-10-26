@@ -1,0 +1,61 @@
+{
+  "TMFX": {
+    "Settings": {
+      "Title": "Token Movement FX",
+      "MenuName": "Token Movement FX",
+      "MenuLabel": "Configure Animations",
+      "MenuHint": "Choose which animation plays for each token movement action.",
+      "EnableName": "Enable Token Movement FX",
+      "EnableHint": "When disabled, no movement animations are played.",
+      "Intro": "Choose the animation for each movement type. The table lists Automated Animations teleport presets (e.g. Misty Step) and On Token/AEFX entries. Presets delegate to AA for Teleport and Burrow; persistent On Token entries can follow the token and be removed when the movement ends.",
+      "PlayOnHint": "When the chosen animation is an Automated Animations teleport preset, the module hands the moving token to AA. Drop the token where you want it: that point is the destination, AA's range circle is skipped, and AA handles sound, effects, fade and the move. On Token and Item animations start the departure effect as soon as the movement begins.",
+      "Movement": "Movement",
+      "Enabled": "On",
+      "Animation": "Animation (Automated Animations)",
+      "Hide": "Hide during movement",
+      "HideHint": "Hides the token between the departure and arrival animation. Only used when the animation has a target/preset section. Delegated Teleport/Burrow presets use the preset's own Alpha/Fade instead.",
+      "RemovePersistent": "Remove persistent animations",
+      "RemovePersistentHint": "When the animation is a persistent On Token effect, remove only the effects this movement created on the token once the movement ends. Other persistent auras on the same token are left alone.",
+      "HideNote": "Hide during movement makes the token invisible while it moves and reveals it when the arrival animation starts. It needs an animation with a Target section or a preset. Teleport/Burrow presets delegated to Automated Animations ignore this box: the preset's Alpha/Delay Fade/Delay Return controls the token there.",
+      "Test": "Test",
+      "TestHint": "Play a test on the selected token",
+      "Teleport": "Teleport",
+      "None": "— None —",
+      "OpenAA": "Open Automated Animations",
+      "OpenSequencer": "Open Sequencer browser",
+      "Refresh": "Refresh list",
+      "Save": "Save",
+      "NoAA": "Automated Animations is not active.",
+      "NoSequencer": "Sequencer is not active. Animations cannot be played.",
+      "NoAnimations": "No compatible animation found. Create or edit an On Token entry, configure an item with the A-A button, or use a teleportation preset (e.g. Misty Step).",
+      "Unnamed": "Unnamed animation",
+      "SearchAnimation": "Search animation…",
+      "TokenTitle": "Token Animation",
+      "TokenEnabled": "Enable animations for this token",
+      "Dedicated": "Dedicated animation",
+      "DedicatedHint": "Use this token's own animation for this movement instead of the global one.",
+      "UniversalLabel": "Universal Animation",
+      "Reset": "Reset to default",
+      "ResetHint": "Clear this token's overrides and follow the global settings again.",
+      "UnsavedTitle": "Unsaved changes",
+      "UnsavedMessage": "You have changes that were not saved yet. Do you want to save before closing?",
+      "Discard": "Discard",
+      "Cancel": "Cancel",
+      "Section": {
+        "presets": "Teleport & Burrow — Automated Animations presets",
+        "other": "Other movements"
+      }
+    },
+    "Notifications": {
+      "Saved": "Token Movement FX settings saved.",
+      "NothingToPlay": "Choose an animation first.",
+      "NoToken": "Select a token on the canvas to test the animation.",
+      "TestFailed": "The test animation could not be played. See the browser console for details.",
+      "NoAA": "Automated Animations is not active.",
+      "NoAAMenu": "Could not open the Automated Animations menu.",
+      "NoSequencer": "Sequencer is not active.",
+      "NoAnimationsFound": "No animation found with the stored reference. Open Configure animations and pick one again.",
+      "Reset": "Token overrides cleared."
+    }
+  }
+}
