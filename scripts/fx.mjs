@@ -31,7 +31,33 @@ const numberOr = (value, fallback) => {
  * }} [options]
  * @returns {Promise<boolean>}                  Whether an animation was played.
  */
-export async function playMovementFx(token, actionId, config, {
+export async function playMovementFx(token, actionId, config, options = {}) {
+  const { test = false } = options;
+  if (!token || !config) return false;
+  if (!config.enabled && !test) return false;
+
+  const action = CONFIG.Token.movement.actions[actionId];
+  if (!action) return false;
+
+  const animationId = config.animationId ?? "";
+  if (!animationId) return false;
+
+  // The Test button must not leave a persistent effect behind, even when the
+  // action is not configured to remove it during real movement. Snapshot the
+  // effects that already exist, play the animation, then give AA/Sequencer a
+  // second to register the new effect before ending only the new ones.
+  const testCleanup = test ? snapshotPersistentEffects() : null;
+  try {
+    return await playMovementFxInternal(token, actionId, config, options);
+  } finally {
+    if (testCleanup) {
+      await wait(1000);
+      await removeNewPersistentEffects(token, testCleanup);
+    }
+  }
+}
+
+async function playMovementFxInternal(token, actionId, config, {
   test = false,
   origin = null,
   destination = null,
@@ -112,7 +138,8 @@ export async function playMovementFx(token, actionId, config, {
     // Source-only ("On Token") animations belong to the token, which is already
     // moving by now. Play them right away instead of waiting for the arrival.
     if (!hasTarget) {
-      const before = config.removePersistent ? snapshotPersistentEffects() : null;
+      // In test mode the outer wrapper handles cleanup, including the 1s wait.
+      const before = !test && config.removePersistent ? snapshotPersistentEffects() : null;
       try {
         return await playAnimationRef(token, animationId, endpoints.origin);
       } finally {
@@ -322,10 +349,16 @@ async function playAnimationRef(token, ref, origin = null) {
     const flags = item.flags?.autoanimations;
     const isPersistent = !!flags?.primary?.options?.persistent;
     const targetOnly = flags?.primary?.options?.playOn === "target";
+    // Motion (shake, lunge, etc.) animates the token itself, so AA must receive
+    // the real Token placeable. The lightweight origin token is not a real
+    // Token and Sequencer rejects it for motions.
+    const hasSourceMotion = !!flags?.motion?.source?.enable;
     // Persistent effects must bind to the real token so they follow it; the
     // fake origin token is only used to anchor non-persistent effects at the
     // departure point.
-    const sourceToken = (isPersistent || !origin) ? token : buildOriginToken(token, origin);
+    const sourceToken = (isPersistent || hasSourceMotion || !origin)
+      ? token
+      : buildOriginToken(token, origin);
     const handler = await api.playAnimation(targetOnly ? token : sourceToken, item, {
       targets: targetOnly ? [token] : []
     });
@@ -941,6 +974,9 @@ function buildOriginFlags(flags) {
   data.source = { enable: false };
   data.levels3d = { enable: false };
   data.macro = { enable: false };
+  // The departure is anchored to a lightweight fake token. Sequencer motions
+  // need a real Token placeable, so they cannot run on it.
+  data.motion = { source: { enable: false }, target: { enable: false } };
   // Only the departure half is played here. Target/Secondary must be removed,
   // not merely disabled: the user may have deleted or disabled them in AA.
   data.target = false;

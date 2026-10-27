@@ -18,7 +18,7 @@
       "RemovePersistentHint": "Quando a animação é um efeito On Token persistente, remove apenas os efeitos que este movimento criou no token assim que o movimento termina. Outras auras persistentes no mesmo token permanecem.",
       "HideNote": "Ocultar durante o movimento deixa o token invisível enquanto ele se desloca e o revela quando a animação de chegada começa. Precisa de uma animação com parte de chegada (Target) ou de um preset. Presets de Teleporte/Escavação delegados ao Automated Animations ignoram esta caixa: neles o Alpha/Delay Fade/Delay Return do preset controla o token.",
       "Test": "Testar",
-      "TestHint": "Reproduzir um teste no token selecionado",
+      "TestHint": "Reproduzir um teste no token selecionado. Efeitos persistentes criados pelo teste são removidos após 1 segundo.",
       "Teleport": "Teleporte",
       "None": "— Nenhuma —",
       "OpenAA": "Abrir Automated Animations",

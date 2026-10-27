@@ -411,18 +411,47 @@ export class MovementFxConfig extends HandlebarsApplicationMixin(ApplicationV2) 
       return;
     }
 
-    const menu = game.settings.menus.get("autoanimations.custom-autorec");
-    if (!menu) {
-      ui.notifications.warn(game.i18n.localize("TMFX.Notifications.NoAAMenu"));
-      return;
+    // Automated Animations 8 exposes a public helper for its own menu. It is
+    // the most stable entry point across the ApplicationV2 refactor.
+    try {
+      const openMenu = globalThis.AutomatedAnimations?.showAutorecMenu;
+      if (typeof openMenu === "function") {
+        openMenu();
+        return;
+      }
+    } catch (err) {
+      console.warn(`${MODULE_ID} | Automated Animations showAutorecMenu failed`, err);
     }
 
-    try {
-      new menu.type();
-    } catch (err) {
-      console.error(`${MODULE_ID} | Could not open the Automated Animations menu`, err);
-      ui.notifications.error(game.i18n.localize("TMFX.Notifications.NoAAMenu"));
+    const menu = game.settings.menus.get("autoanimations.custom-autorec");
+    if (menu?.type) {
+      try {
+        const app = new menu.type();
+        // Before AA 8 the launcher rendered from its constructor. In AA 8 it is
+        // an ApplicationV2 whose render() calls AutorecMenu.show(), so
+        // constructing it alone no longer opens anything.
+        if (typeof app.render === "function") {
+          app.render({ force: true });
+          return;
+        }
+      } catch (err) {
+        console.warn(`${MODULE_ID} | Could not open the Automated Animations menu`, err);
+      }
     }
+
+    // Last resort for builds that only expose the hook their own UI uses.
+    const hook = Hooks.events?.["AA.Open.AutorecSetting"];
+    const hasHook = Array.isArray(hook) && hook.length > 0;
+    if (hasHook) {
+      try {
+        Hooks.callAll("AA.Open.AutorecSetting");
+        return;
+      } catch (err) {
+        console.error(`${MODULE_ID} | Could not open the Automated Animations menu`, err);
+      }
+    }
+
+    ui.notifications.error(game.i18n.localize("TMFX.Notifications.NoAAMenu"));
   }
 
   static async #onOpenSequencer() {

@@ -18,7 +18,7 @@
       "RemovePersistentHint": "When the animation is a persistent On Token effect, remove only the effects this movement created on the token once the movement ends. Other persistent auras on the same token are left alone.",
       "HideNote": "Hide during movement makes the token invisible while it moves and reveals it when the arrival animation starts. It needs an animation with a Target section or a preset. Teleport/Burrow presets delegated to Automated Animations ignore this box: the preset's Alpha/Delay Fade/Delay Return controls the token there.",
       "Test": "Test",
-      "TestHint": "Play a test on the selected token",
+      "TestHint": "Play a test on the selected token. Persistent effects created by the test are removed after 1 second.",
       "Teleport": "Teleport",
       "None": "— None —",
       "OpenAA": "Open Automated Animations",

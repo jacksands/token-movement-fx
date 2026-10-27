@@ -50,7 +50,7 @@ Each row is a movement type.
 | **Animation** | Which animation plays. The search above the list ignores accents and case. |
 | **Hide during movement** | Hides the token between departure and arrival. Checked by default for Teleport. |
 | **Remove persistent animations** | Removes, at the end of the movement, only the persistent effects it created on that token. |
-| **Test** | Plays on the selected token using the current screen values (no need to save). |
+| **Test** | Plays on the selected token using the current screen values (no need to save). If the animation is persistent, the test removes it after 1 second. |
 
 - When closing with pending changes, the module asks to **Save**, **Discard**, or **Cancel**.
 - **Restore default** (token window) clears dedications and goes back to following the universal configuration.
@@ -91,11 +91,17 @@ Choosing a **Preset — …** makes the module cancel Foundry's normal movement 
 
 The animation plays once, at the origin, when the movement starts. This is the typical case for **persistent** effects.
 
+### AA 8 Motion (Shake, Lunge, ...)
+
+Source motions are applied to the real moving token. When a source motion is enabled, the effect plays at the token's current position instead of the origin, because Sequencer needs the real Token placeable to animate it. The motion duration is the one configured in Automated Animations.
+
 ## Persistent Animations
 
 1. In AA, create an **On Token** animation and check **Persistent**.
 2. Select it on the movement row and check **Remove persistent animations**.
 3. The effect follows the token; when the movement ends, the module removes **only** the persistent effects it created on that token. Other persistent auras remain.
+
+**Test** always removes the persistent effects it creates after **1 second**, even if **Remove persistent animations** is unchecked. This keeps a test playback from leaving an aura on the canvas.
 
 > Removal applies to animations **without arrival** (single departure) in non-Teleport actions — for example, **Burrow**, **Walk**, and **Fly**. In presets and **Teleport**, AA controls the effect, and the checkbox does not apply.
 

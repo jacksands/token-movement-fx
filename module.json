@@ -2,7 +2,7 @@
   "id": "token-movement-fx",
   "title": "Token Movement FX",
   "description": "Toca animações do Sequencer, configuradas no Automated Animations, quando um Token se move usando uma ação específica (Teleporte/Blink, Andar, Voar, etc.). Presets de teleporte podem ser delegados ao próprio Automated Animations, que assume som, animação, desaparecimento e movimento do token.",
-  "version": "1.0.0-beta",
+  "version": "1.0.1-beta",
   "authors": [
     {
       "name": "Jack_Sands"
